@@ -1,0 +1,50 @@
+# игнорируем папку битрикс
+bitrix/*
+
+# исключаем из игнора папки modules, components, php_interface
+!bitrix/modules/
+!bitrix/components/
+!bitrix/php_interface/
+#!bitrix/admin/
+#!bitrix/tools/
+!bitrix/composer-bx.json
+!bitrix/composer-bx.lock
+
+
+# игнорируем все модули
+bitrix/modules/*
+# исключаем из игнора необходимые для нас модули
+
+# игнорим компоненты в namespace bitrix
+# соответственно компоненты, находящиеся в других неймспейсах, игнорироваться не будут
+bitrix/components/bitrix/
+
+# в php_interface игнорим файлы, связанные с БД
+bitrix/php_interface/dbconn.php
+bitrix/php_interface/after_connect_d7.php
+bitrix/php_interface/after_connect.php
+bitrix/php_interface/cron_events.php
+
+
+# различные файлы и папки
+upload/
+.htaccess
+.htaccess.restore
+*.DS_Store
+*license*
+robots.txt
+web.config
+log.txt
+/sitemap*
+cgi-bin/
+.cache/*
+.bash_history
+/local.zip
+*node_modules*
+
+# IDE
+.idea
+nbproject
+.buildpath
+.project
+.settings
