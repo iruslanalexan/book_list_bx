@@ -19,7 +19,7 @@ $urlTemplates = array(
 );
 
 $APPLICATION->IncludeComponent(
-    'local.book:xxxxxx.edit',
+    'local.book:book.edit',
     '',
     array(
         'BOOK_ID' => $arResult['VARIABLES']['BOOK_ID'],
