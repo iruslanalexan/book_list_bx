@@ -108,6 +108,10 @@
   скажите, городить по OnUserTypeBuildList свой развесистый примитивный тип? Хотите улучшений по части пользовательских
   свойств? Это эже другой гит))
 
+Пока непонятно, как быть с полем "файлы"
+Файлы - возможно добавление через через **BX drag_n_drop** c компьютера или **с сущности "диск"**   Это не так уж и
+сложно, можно сделать поле custom ui.grid, как
+[это сделано здесь ](https://github.com/greetingsgoods/book_list_bx/blob/77f6adcc356a3f5873d77a9cf57e74da4937f2b9/install/files/components/local.book/book.show/templates/.default/template.php)
   
 
 
