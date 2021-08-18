@@ -14,5 +14,5 @@ $MESS['BOOK_PRICE'] = 'Цена';
 
 $MESS['BOOK_FIELD_ADDRESS'] = 'Адрес';
 $MESS['BOOK_FIELD_ASSIGNED_BY'] = 'Автор';
-$MESS['BOOK_TAB_DEALS_NAME'] = 'Сделки';
-$MESS['BOOK_TAB_DEALS_TITLE'] = 'Связанные сделки';
+$MESS['BOOK_NOTCHOISE'] = '--не выбрано--';
+

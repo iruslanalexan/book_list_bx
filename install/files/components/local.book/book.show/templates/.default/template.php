@@ -1,9 +1,10 @@
 <?php
 defined('B_PROLOG_INCLUDED') || die;
 
-use Bitrix\Main\Config\Option;
+
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Crm\ContactTable;
 
 /** @var CBitrixComponentTemplate $this */
 
@@ -13,16 +14,28 @@ if (!Loader::includeModule('crm')) {
 }
 
 ob_start();
-$APPLICATION->IncludeComponent(
-    'local.book:xxxxx.bounddeals',
-    '',
-    array(
-        'STORE_ID' => $arResult['STORE']['ID']
-    ),
-    $this->getComponent(),
-    array('HIDE_ICONS' => 'Y')
-);
-$boundDealsHtml = ob_get_clean();
+$dbUsersContact = ContactTable::getList(array(
+    'select' => array('ID', 'NAME', 'LAST_NAME')
+));
+$contacts = array();
+
+?>
+    <select
+        name="setContact">
+        <option value="0"><?= Loc::getMessage('BOOK_NOTCHOISE'); ?></option><?
+        foreach ($dbUsersContact as $valueID => $value) {
+            // print_r($value);
+            ?>
+            <option
+            value="<? echo $value['ID']; ?>"><? echo trim(sprintf('%s %s',
+                $value['NAME'],
+                $value['LAST_NAME']
+            )) ?></option><?
+        }
+        ?></select>
+<?php
+
+$boundContact = ob_get_clean();
 
 $APPLICATION->IncludeComponent(
     'bitrix:crm.interface.form',
@@ -89,23 +102,12 @@ $APPLICATION->IncludeComponent(
                         'value' => $arResult['STORE']['PRICE'],
                         'isTactile' => true,
                     ),
+
                     array(
                         'id' => 'ASSIGNED_BY',
                         'name' => Loc::getMessage('BOOK_FIELD_ASSIGNED_BY'),
                         'type' => 'custom',
-                        'value' => CCrmViewHelper::PrepareFormResponsible(
-                            $arResult['STORE']['ASSIGNED_BY_ID'],
-                            CSite::GetNameFormat(),
-                            Option::get('intranet', 'path_user', '', SITE_ID) . '/'
-                        ),
-                        'isTactile' => true,
-                    ),
-                    array(
-                        'id' => 'TEST',
-                        'name' => 'TEST',
-                        'type' => 'custom',
-                        'value' => '<input type="text" name="PROPERTY_FILE_TYPE" value="">' .
-                            (0 < intval($arProperty['ID']) ? $arProperty['ID'] : GetMessage("CRM_PRODUCT_PE_PROP_NEW")),
+                        'value' => $boundContact,
                         'isTactile' => true,
                     )
                 )
@@ -116,5 +118,4 @@ $APPLICATION->IncludeComponent(
     $this->getComponent(),
     array('HIDE_ICONS' => 'Y')
 );
-$customFieldHTML =
-    '';
+
