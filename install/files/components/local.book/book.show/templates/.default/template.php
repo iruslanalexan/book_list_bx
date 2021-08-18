@@ -78,7 +78,7 @@ $APPLICATION->IncludeComponent(
                     array(
                         'id' => 'YEAR_BOOK',
                         'name' => Loc::getMessage('BOOK_YEAR_BOOK'),
-                        'type' => 'text',
+                        'type' => 'date',
                         'value' => $arResult['STORE']['YEAR_BOOK'],
                         'isTactile' => true,
                     ),
@@ -99,24 +99,22 @@ $APPLICATION->IncludeComponent(
                             Option::get('intranet', 'path_user', '', SITE_ID) . '/'
                         ),
                         'isTactile' => true,
+                    ),
+                    array(
+                        'id' => 'TEST',
+                        'name' => 'TEST',
+                        'type' => 'custom',
+                        'value' => '<input type="text" name="PROPERTY_FILE_TYPE" value="">' .
+                            (0 < intval($arProperty['ID']) ? $arProperty['ID'] : GetMessage("CRM_PRODUCT_PE_PROP_NEW")),
+                        'isTactile' => true,
                     )
                 )
             ),
-            array(
-                'id' => 'deals',
-                'name' => Loc::getMessage('BOOK_TAB_DEALS_NAME'),
-                'title' => Loc::getMessage('BOOK_TAB_DEALS_TITLE'),
-                'fields' => array(
-                    array(
-                        'id' => 'DEALS',
-                        'colspan' => true,
-                        'type' => 'custom',
-                        'value' => $boundDealsHtml
-                    )
-                )
-            )
+
         ),
     ),
     $this->getComponent(),
     array('HIDE_ICONS' => 'Y')
 );
+$customFieldHTML =
+    '';

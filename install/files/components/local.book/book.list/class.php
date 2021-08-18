@@ -2,6 +2,7 @@
 defined('B_PROLOG_INCLUDED') || die;
 
 
+use Bitrix\Crm\ContactTable;
 use Local\Book\Entity\BookTable;
 use Bitrix\Main\Context;
 use Bitrix\Main\Loader;
@@ -88,7 +89,13 @@ class CBookStoresListComponent extends CBitrixComponent
                 'id' => 'AUTHOR',
                 'name' => Loc::getMessage('BOOK_AUTHOR'),
                 'sort' => 'AUTHOR',
+                'default' => false,
+            ),
+            array(
+                'id' => 'ENTITY_CONTACT',
+                'name' => Loc::getMessage('BOOK_AUTHOR'),
                 'default' => true,
+                'sort' => 'ENTITY_CONTACT'
             ),
         );
 
@@ -292,7 +299,7 @@ class CBookStoresListComponent extends CBitrixComponent
         $dbStores = BookTable::getList($params);
         $stores = $dbStores->fetchAll();
 
-        $userIds = array_column($stores, 'ASSIGNED_BY_ID');
+        $userIds = array_column($stores, 'AUTHOR');
         $userIds = array_unique($userIds);
         $userIds = array_filter(
             $userIds,
@@ -301,7 +308,7 @@ class CBookStoresListComponent extends CBitrixComponent
             }
         );
 
-        $dbUsers = UserTable::getList(array(
+        $dbUsers = ContactTable::getList(array(
             'filter' => array('=ID' => $userIds)
         ));
         $users = array();
@@ -310,11 +317,15 @@ class CBookStoresListComponent extends CBitrixComponent
         }
 
         foreach ($stores as &$store) {
-            if (intval($store['ASSIGNED_BY_ID']) > 0) {
-                $store['ASSIGNED_BY'] = $users[$store['ASSIGNED_BY_ID']];
+            if ((int)$store['AUTHOR'] > 0) {
+                $store['ENTITY_CONTACT'] = trim(sprintf('%s %s',
+                    $users[$store['AUTHOR']]['NAME'],
+                    $users[$store['AUTHOR']]['LAST_NAME']
+                ));
             }
+            $store['YEAR_BOOK'] = $store['YEAR_BOOK']->format('d.m.Y');
         }
-
         return $stores;
     }
+
 }

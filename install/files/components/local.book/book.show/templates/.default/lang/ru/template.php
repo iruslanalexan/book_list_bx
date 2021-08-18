@@ -7,7 +7,6 @@ $MESS['BOOK_TAB_STORE_TITLE'] = 'Свойства книги';
 $MESS['BOOK_FIELD_SECTION_STORE'] = 'Книга';
 $MESS['BOOK_FIELD_ID'] = 'ID';
 $MESS['BOOK_FIELD_NAME'] = 'Название';
-$MESS['BOOK_FIELD_NAME'] = 'Название';
 $MESS['BOOK_SHORT_DESCRIPTION'] = 'Короткое описание';
 $MESS['BOOK_ATTACH_FILES'] = 'Файлы';
 $MESS['BOOK_YEAR_BOOK'] = 'Год издания';

@@ -65,7 +65,7 @@ $APPLICATION->IncludeComponent(
                     array(
                         'id' => 'YEAR_BOOK',
                         'name' => Loc::getMessage('BOOK_YEAR_BOOK'),
-                        'type' => 'text',
+                        'type' => 'date',
                         'value' => $arResult['STORE']['YEAR_BOOK'],
                         'isTactile' => true,
                     ),
