@@ -56,7 +56,7 @@ $APPLICATION->IncludeComponent(
 
 
 $APPLICATION->IncludeComponent(
-    'local.book:xxxxx.show',
+    'local.book:book.show',
     '',
     array(
         'BOOK_ID' => $arResult['VARIABLES']['BOOK_ID']
